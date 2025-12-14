@@ -10,18 +10,21 @@ public class ThickBorderDecorator : FigureDecorator
 
     public override void Draw(Graphics g)
     {
-        // сначала фигура
         inner.Draw(g);
 
-        // затем жирная рамка
-        using (Pen pen = new Pen(Color.DarkBlue, 3 + ExtraWidth))
+        Rectangle r = inner.GetBounds();
+
+        using (Pen pen = new Pen(Color.DarkBlue, 6))
         {
-            g.DrawRectangle(pen,
-                Math.Min(inner.StartPoint.X, inner.EndPoint.X),
-                Math.Min(inner.StartPoint.Y, inner.EndPoint.Y),
-                Math.Abs(inner.StartPoint.X - inner.EndPoint.X),
-                Math.Abs(inner.StartPoint.Y - inner.EndPoint.Y)
-            );
+            if (inner is Circle)
+            {
+                g.DrawEllipse(pen, r);
+            }
+            else
+            {
+                g.DrawRectangle(pen, r);
+            }
         }
     }
+
 }

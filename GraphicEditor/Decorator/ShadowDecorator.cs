@@ -7,13 +7,20 @@ public class ShadowDecorator : FigureDecorator
 
     public override void Draw(Graphics g)
     {
-        // рисуем тень
-        using (Brush b = new SolidBrush(Color.FromArgb(80, Color.Black)))
-            g.FillRectangle(b, inner.StartPoint.X + 5, inner.StartPoint.Y + 5,
-                               inner.EndPoint.X - inner.StartPoint.X,
-                               inner.EndPoint.Y - inner.StartPoint.Y);
+        Rectangle r = inner.GetBounds();
 
-        // рисуем саму фигуру
-        base.Draw(g);
+        if (inner is Circle)
+        {
+            using (Brush b = new SolidBrush(Color.FromArgb(80, Color.Black)))
+                g.FillEllipse(b, r.X + 5, r.Y + 5, r.Width, r.Height);
+        }
+        else
+        {
+            using (Brush b = new SolidBrush(Color.FromArgb(80, Color.Black)))
+                g.FillRectangle(b, r.X + 5, r.Y + 5, r.Width, r.Height);
+        }
+
+        inner.Draw(g);
     }
+
 }

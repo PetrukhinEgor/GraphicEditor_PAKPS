@@ -53,5 +53,16 @@ namespace GraphicEditor.Figures
             StartPoint = new Point(StartPoint.X + deltaX, StartPoint.Y + deltaY);
             EndPoint = new Point(EndPoint.X + deltaX, EndPoint.Y + deltaY);
         }
+
+        public override Rectangle GetBounds()
+        {
+            int x = Math.Min(StartPoint.X, EndPoint.X);
+            int y = Math.Min(StartPoint.Y, EndPoint.Y);
+            int w = Math.Abs(EndPoint.X - StartPoint.X);
+            int h = Math.Abs(EndPoint.Y - StartPoint.Y);
+
+            return new Rectangle(x, y, w, h);
+        }
+
     }
 }

@@ -24,5 +24,7 @@ namespace GraphicEditor.Figures
         public abstract void Draw(Graphics g);
         public abstract bool Contains(Point point);
         public abstract void Move(int deltaX, int deltaY);
+        public abstract Rectangle GetBounds();
+
     }
 }

@@ -11,9 +11,9 @@ public abstract class FigureDecorator : Figure
         inner = fig;
     }
 
-    public override void Draw(Graphics g)
+    public override Rectangle GetBounds()
     {
-        inner.Draw(g);
+        return inner.GetBounds();
     }
 
     public override bool Contains(Point p)
